@@ -5,30 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Assistant</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="background-pattern"></div>
+    
     <div class="container">
         <div class="header">
-            <h1>🔍 Search Assistant</h1>
-            <p>Get AI-powered answers with real-time web search</p>
+            <div class="logo">
+                <div class="logo-icon">🔍</div>
+                <h1>Search Assistant</h1>
+            </div>
+            <p class="subtitle">Get AI-powered answers with real-time web search</p>
         </div>
         
-        <div class="search-form">
+        <div class="search-card">
             <div class="mode-selector">
-                <button class="mode-btn active" data-mode="quick">⚡ Quick Search</button>
-                <button class="mode-btn" data-mode="deep">🔬 Deep Search</button>
+                <button class="mode-btn active" data-mode="quick">
+                    <span class="mode-icon">⚡</span>
+                    <span class="mode-text">Quick Search</span>
+                    <span class="mode-desc">Fast results</span>
+                </button>
+                <button class="mode-btn" data-mode="deep">
+                    <span class="mode-icon">🔬</span>
+                    <span class="mode-text">Deep Search</span>
+                    <span class="mode-desc">Comprehensive analysis</span>
+                </button>
             </div>
             
-            <div class="input-group">
-                <input type="text" id="question" class="search-input" placeholder="Ask any question..." />
+            <div class="search-form">
+                <div class="input-group">
+                    <input type="text" id="question" class="search-input" placeholder="Ask any question..." />
+                    <button id="searchBtn" class="search-btn">
+                        <span class="btn-text">Search</span>
+                        <span class="btn-icon">→</span>
+                    </button>
+                </div>
             </div>
-            
-            <button id="searchBtn" class="search-btn">Search</button>
         </div>
         
         <div id="loading" class="loading" style="display: none;">
-            <div class="spinner"></div>
-            <span id="loadingText">Searching...</span>
+            <div class="loading-content">
+                <div class="spinner"></div>
+                <span id="loadingText">Searching...</span>
+            </div>
         </div>
         
         <div id="results" class="results"></div>
