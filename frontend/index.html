@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Assistant</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔍 Search Assistant</h1>
+            <p>Get AI-powered answers with real-time web search</p>
+        </div>
+        
+        <div class="search-form">
+            <div class="mode-selector">
+                <button class="mode-btn active" data-mode="quick">⚡ Quick Search</button>
+                <button class="mode-btn" data-mode="deep">🔬 Deep Search</button>
+            </div>
+            
+            <div class="input-group">
+                <input type="text" id="question" class="search-input" placeholder="Ask any question..." />
+            </div>
+            
+            <button id="searchBtn" class="search-btn">Search</button>
+        </div>
+        
+        <div id="loading" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <span id="loadingText">Searching...</span>
+        </div>
+        
+        <div id="results" class="results"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

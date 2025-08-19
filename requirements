@@ -1,0 +1,11 @@
+flask
+flask-cors
+crawl4ai
+gunicorn
+playwright
+openai>=1.0.0
+requests
+python-dotenv
+fastapi
+uvicorn[standard]
+pydantic
