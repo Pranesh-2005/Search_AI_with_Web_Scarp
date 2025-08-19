@@ -35,23 +35,99 @@
 
 body {
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: var(--text-primary);
   line-height: 1.6;
   min-height: 100vh;
   position: relative;
+  overflow-x: hidden;
 }
 
+/* Enhanced background with subtle patterns */
 .background-pattern {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: radial-gradient(circle at 25% 25%, rgba(37, 99, 235, 0.05) 0%, transparent 50%),
-    radial-gradient(circle at 75% 75%, rgba(37, 99, 235, 0.03) 0%, transparent 50%);
+  background: 
+    /* Animated gradient overlay */
+    linear-gradient(
+      135deg,
+      rgba(102, 126, 234, 0.9) 0%,
+      rgba(118, 75, 162, 0.8) 25%,
+      rgba(64, 123, 255, 0.85) 50%,
+      rgba(120, 80, 170, 0.8) 75%,
+      rgba(102, 126, 234, 0.9) 100%
+    ),
+    /* Subtle dot pattern */
+    radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.15) 1px, transparent 0);
+  background-size: 100% 100%, 40px 40px;
+  animation: backgroundShift 20s ease-in-out infinite;
   pointer-events: none;
-  z-index: -1;
+  z-index: -2;
+}
+
+/* Add floating geometric shapes */
+.background-pattern::before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  border-radius: 50%;
+  animation: float1 15s ease-in-out infinite;
+}
+
+.background-pattern::after {
+  content: '';
+  position: absolute;
+  bottom: 15%;
+  right: 15%;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+  border-radius: 20px;
+  animation: float2 12s ease-in-out infinite reverse;
+}
+
+@keyframes backgroundShift {
+  0%, 100% {
+    background-position: 0% 0%, 0 0;
+  }
+  25% {
+    background-position: 100% 100%, 10px 10px;
+  }
+  50% {
+    background-position: 0% 100%, 20px 0px;
+  }
+  75% {
+    background-position: 100% 0%, 10px 20px;
+  }
+}
+
+@keyframes float1 {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(-20px) rotate(180deg);
+    opacity: 0.3;
+  }
+}
+
+@keyframes float2 {
+  0%, 100% {
+    transform: translateX(0px) rotate(0deg);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateX(-15px) rotate(-90deg);
+    opacity: 0.8;
+  }
 }
 
 .container {
@@ -62,6 +138,8 @@ body {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  position: relative;
+  z-index: 1;
 }
 
 /* Header */
@@ -80,39 +158,45 @@ body {
 
 .logo-icon {
   font-size: 2.5rem;
-  background: linear-gradient(135deg, var(--primary-color), #3b82f6);
+  background: linear-gradient(135deg, #ffffff, #f0f8ff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  filter: drop-shadow(0 2px 4px rgba(37, 99, 235, 0.2));
+  filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
 }
 
 .header h1 {
   font-size: 2.5rem;
   font-weight: 700;
-  background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
+  background: linear-gradient(135deg, #ffffff, #f0f8ff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   letter-spacing: -0.025em;
+  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.3);
 }
 
 .subtitle {
   font-size: 1.125rem;
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.9);
   font-weight: 400;
   max-width: 500px;
   margin: 0 auto;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 /* Search Card */
 .search-card {
-  background: var(--bg-primary);
+  background: rgba(255, 255, 255, 0.95);
   border-radius: var(--radius-xl);
   padding: 2rem;
-  box-shadow: var(--shadow-xl);
-  border: 1px solid var(--border-color);
-  backdrop-filter: blur(10px);
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 /* Mode Selector */
@@ -284,10 +368,11 @@ body {
   align-items: center;
   gap: 1rem;
   padding: 2rem;
-  background: var(--bg-primary);
+  background: rgba(255, 255, 255, 0.95);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
 }
 
 .spinner {
@@ -322,12 +407,13 @@ body {
 }
 
 .answer-card {
-  background: var(--bg-primary);
+  background: rgba(255, 255, 255, 0.95);
   border-radius: var(--radius-lg);
   padding: 2rem;
   box-shadow: var(--shadow-md);
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-left: 4px solid var(--primary-color);
+  backdrop-filter: blur(10px);
 }
 
 .answer-title {
@@ -357,11 +443,12 @@ body {
 }
 
 .sources {
-  background: var(--bg-primary);
+  background: rgba(255, 255, 255, 0.95);
   border-radius: var(--radius-lg);
   padding: 1.5rem;
   box-shadow: var(--shadow-md);
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
 }
 
 .sources-title {
@@ -535,24 +622,33 @@ body {
 
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
-  :root {
-    --bg-primary: #0f172a;
-    --bg-secondary: #1e293b;
-    --bg-tertiary: #334155;
-    --text-primary: #f8fafc;
-    --text-secondary: #cbd5e1;
-    --text-muted: #94a3b8;
-    --border-color: #334155;
-    --border-hover: #475569;
-  }
-
   body {
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   }
 
   .background-pattern {
-    background-image: radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 75% 75%, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
+    background: 
+      linear-gradient(
+        135deg,
+        rgba(26, 26, 46, 0.9) 0%,
+        rgba(22, 33, 62, 0.8) 25%,
+        rgba(29, 39, 78, 0.85) 50%,
+        rgba(25, 31, 56, 0.8) 75%,
+        rgba(26, 26, 46, 0.9) 100%
+      ),
+      radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.1) 1px, transparent 0);
+  }
+
+  .header h1,
+  .logo-icon {
+    background: linear-gradient(135deg, #ffffff, #e0e7ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .subtitle {
+    color: rgba(255, 255, 255, 0.8);
   }
 }
 
@@ -571,6 +667,6 @@ html {
 
 /* Selection styles */
 ::selection {
-  background: rgba(37, 99, 235, 0.2);
-  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.2);
+  color: inherit;
 }
