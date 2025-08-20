@@ -57,11 +57,10 @@ class SearchResponse(BaseModel):
 def search_serper(query):
     headers = {
         "X-API-KEY": SERPER_API_KEY,
-        "Content-Type": "application/json",
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+        "Content-Type": "application/json"
     }
     payload = {"q": query}
-    response = requests.post("https://google.serper.dev/search", headers=headers, json=payload, verify=False, timeout=30)
+    response = requests.post("https://google.serper.dev/search", headers=headers, json=payload, verify=False)
     results = response.json()
 
     # Return both snippets and URLs for crawling
@@ -81,16 +80,7 @@ def search_serper(query):
 async def crawl_to_markdown(url: str) -> str:
     """Crawl a URL and return its content as markdown."""
     try:
-        browser_conf = BrowserConfig(
-            headless=True, 
-            verbose=False,
-            browser_args=[
-                "--ignore-ssl-errors=yes",
-                "--ignore-certificate-errors=yes",
-                "--disable-web-security",
-                "--no-sandbox"
-            ]
-        )
+        browser_conf = BrowserConfig(headless=True, verbose=False)
         filter_strategy = PruningContentFilter()
         md_gen = DefaultMarkdownGenerator(content_filter=filter_strategy)
         run_conf = CrawlerRunConfig(markdown_generator=md_gen)
@@ -131,7 +121,7 @@ async def generate_answer_with_crawling(question):
         response = client.chat.completions.create(
             model=DEPLOYMENT_NAME,
             messages=messages,
-            temperature=0.4,
+            temperature=0.8,
             max_tokens=800
         )
         return response.choices[0].message.content, search_results
