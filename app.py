@@ -197,7 +197,7 @@ async def search_endpoint(request: SearchRequest):
         raise HTTPException(status_code=500, detail=error_response)
 
 if __name__ == "__main__":
+    port = int(os.getenv("PORT", 5000))
     print("🚀 Starting Search Assistant Server...")
-    print("📱 Frontend: http://localhost:8000")
-    print("🔧 API Docs: http://localhost:8000/docs")
-    uvicorn.run(app, host="0.0.0.0", port=5000)
+    print(f"📱 Port: {port}")
+    uvicorn.run(app, host="0.0.0.0", port=port)
