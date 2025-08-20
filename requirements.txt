@@ -9,3 +9,5 @@ python-dotenv
 fastapi
 uvicorn[standard]
 pydantic
+urllib3
+certifi
