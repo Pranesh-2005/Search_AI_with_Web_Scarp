@@ -154,6 +154,10 @@ def generate_answer(question):
     return response.choices[0].message.content
 
 # API Endpoints
+@app.get("/")
+async def root():
+    return {"status": "ok"}
+
 
 @app.post("/search")
 async def search_endpoint(request: SearchRequest):
